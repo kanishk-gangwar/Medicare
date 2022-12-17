@@ -2,6 +2,8 @@
 
 Medicare is a Kotlin mobile application that allows users to manage their medication list using a real-time database provided by Firebase Firestore. Users can add new medications to their list, view the medications in a recycler view, and delete medications from the list as needed.
 
+![Clean Messaging Apps Logo](https://user-images.githubusercontent.com/120783085/208241744-e3844ae7-bba3-4da4-b5d1-4dbfd8b930d3.png)
+
 ## Getting Started
 
 These instructions will help you get the app up and running on your local device for development and testing purposes.
