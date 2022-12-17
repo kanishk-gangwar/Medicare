@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/insrtmed"
+    tools:context=".InsertMed">
+
+    <EditText
+        android:id="@+id/Insertname"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:hint="Enter medicine name"
+        android:layout_marginTop="110dp"
+        android:background="@drawable/edit"
+        android:paddingLeft="20dp"
+        android:inputType="textCapSentences|textMultiLine"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:id="@+id/Insertsymtoms"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:hint="Enter symptoms"
+        android:layout_marginTop="190dp"
+        android:background="@drawable/edit"
+        android:paddingLeft="20dp"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:id="@+id/Insertdescription"
+        android:layout_width="350dp"
+        android:layout_height="90dp"
+        android:hint="Enter description"
+        android:layout_marginTop="270dp"
+        android:background="@drawable/edit"
+        android:paddingLeft="20dp"
+        android:layout_centerHorizontal="true"/>
+    <Button
+        android:id="@+id/insertmed"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="390dp"
+        android:background="#FF9800"
+        android:hint="Insert Medicine Data"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/newbackground"
+    tools:context=".SignUpActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome, "
+            android:textColor="@color/white"
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:layout_gravity="left"
+            android:layout_marginStart="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SignUp to continue"
+            android:textColor="@color/white"
+            android:textSize="28dp"
+            android:textStyle="bold"
+            android:layout_gravity="left"
+            android:layout_marginStart="30dp"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            android:src="@drawable/pharmacylogo"
+            android:layout_margin="20dp"/>
+
+            <EditText
+                android:id="@+id/signUpName"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:hint="Name"
+                android:paddingLeft="20px"
+                android:background="@drawable/edit"
+                android:textColor="@color/black"/>
+            <EditText
+                android:id="@+id/signUpEmail"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:hint="Email address"
+                android:paddingLeft="20px"
+                android:background="@drawable/edit"
+                android:textColor="@color/black"
+                android:layout_margin="10dp"/>
+
+            <EditText
+                android:id="@+id/signUpPhone"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:hint="Phone Number"
+                android:paddingLeft="20px"
+                android:background="@drawable/edit"
+                android:textColor="@color/black" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signUpPasswordLayout"
+            android:layout_width="370dp"
+            android:layout_height="60dp"
+            app:passwordToggleEnabled="true">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signUpPassword"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Password"
+                android:paddingLeft="20px"
+                android:background="@drawable/edit"
+                android:textColor="@color/black"
+                android:layout_margin="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signUpCPasswordLayout"
+            android:layout_width="370dp"
+            android:layout_height="60dp"
+            app:passwordToggleEnabled="true">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signUpCPassword"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Confirm Password"
+                android:paddingLeft="20px"
+                android:background="@drawable/edit"
+                android:textColor="@color/black"
+                android:layout_margin="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+<!--            <EditText-->
+<!--                android:id="@+id/signUpPassword"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="Password"-->
+<!--                android:textColor="#000000"/>-->
+<!--            <EditText-->
+<!--                android:id="@+id/signUpCPassword"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="Confirm Password"-->
+<!--                android:textColor="#000000"/>-->
+        <Button
+            android:id="@+id/SignUpButton"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:text="Sign Up"
+            android:textColor="@color/black"
+            android:background="#37D50B"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="7dp"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account ?"
+            android:textAllCaps="true"
+            android:layout_gravity="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/signInText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign In"
+            android:layout_gravity="center"
+            android:textColor="#FFC107"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_marginStart="10dp"/>
+
+    </LinearLayout>
+</RelativeLayout>
