@@ -46,8 +46,3 @@ See also the list of [contributors](https://github.com/kanishk-gangwar/Medicare/
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/kanishk-gangwar/Medicare/blob/master/LICENSE) file for details.
 
-## Acknowledgments
-
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
