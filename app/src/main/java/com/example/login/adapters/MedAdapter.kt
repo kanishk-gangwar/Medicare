@@ -8,10 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.login.R
 import com.example.login.medicines
 
-class MedAdapter(private var Medlist : ArrayList<medicines> ) :
+class MedAdapter(private var Medlist : List<medicines> ) :
     RecyclerView.Adapter<MedAdapter.MyViewHolder>(){
 
     private lateinit var mlistener : onItemClickListener
+
+    fun submitList(newList: List<medicines>) {
+        Medlist = newList
+        notifyDataSetChanged()
+    }
 
     init {
         this.Medlist = Medlist

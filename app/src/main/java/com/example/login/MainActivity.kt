@@ -1,35 +1,39 @@
 package com.example.login
 
 import android.app.Dialog
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
-import android.view.View
-import android.view.Window
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ProgressBar
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.login.adapters.MedAdapter
-import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
-import java.lang.ref.Reference
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 
 class MainActivity : AppCompatActivity() {
+
+
     private lateinit var database: FirebaseDatabase
-   private lateinit var recyclerview : RecyclerView
+    private lateinit var recyclerview : RecyclerView
     private lateinit var GreetText: TextView
     private lateinit var auth: FirebaseAuth
     private lateinit var Logoutbtn: Button
@@ -42,6 +46,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var msearchText : EditText
     lateinit var insertbtn : RelativeLayout
     lateinit var searchbtn : RelativeLayout
+
+    private lateinit var adapter: MedAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +85,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
             }
         }
+
         Log.d("Kanishk", auth.uid.toString() + "  " + auth.currentUser)
 
         Logoutbtn.setOnClickListener {
@@ -101,20 +108,21 @@ class MainActivity : AppCompatActivity() {
         cal.time = date
         val hour: Int = cal.get(Calendar.HOUR_OF_DAY)
         GreetText = findViewById(R.id.GreetText)
+        val GreetBg= findViewById<LinearLayout>(R.id.GeetBg)
 
 
         if (hour in 0..12) {
             GreetText.text = "Good Morning!!"
-            GreetText.setBackgroundResource(R.drawable.gm)
+            GreetBg.setBackgroundResource(R.drawable.gm)
         } else if (hour in 12..17) {
             GreetText.text = "Good Afternoon!!"
-            GreetText.setBackgroundResource(R.drawable.ga)
+            GreetBg.setBackgroundResource(R.drawable.ga)
         } else if (hour in 17..21) {
             GreetText.text = "Good Evening!!"
-            GreetText.setBackgroundResource(R.drawable.ge)
+            GreetBg.setBackgroundResource(R.drawable.ge)
         } else {
             GreetText.text = "Good Night!!"
-            GreetText.setBackgroundResource(R.drawable.gn)
+            GreetBg.setBackgroundResource(R.drawable.gn)
         }
         if (auth.currentUser == null) {
             val intent = Intent(this, SignInActivity::class.java)
@@ -123,6 +131,8 @@ class MainActivity : AppCompatActivity() {
 
         // getting data function from firebase
         getMedData()
+
+
         insertbtn.setOnClickListener {
             val intent = Intent(this, InsertMed::class.java)
             startActivity(intent)
@@ -154,6 +164,7 @@ class MainActivity : AppCompatActivity() {
                     searchList.addAll(medArrayList)
                     val mAdapter = MedAdapter(medArrayList)
                     recyclerview.adapter = mAdapter
+                    setupSearchEditText(mAdapter)
 
                     mAdapter.setOnItemClickListener(object : MedAdapter.onItemClickListener{
                         override fun onItemClick(position: Int) {
@@ -167,13 +178,17 @@ class MainActivity : AppCompatActivity() {
 
                     })
                     custompgbar.dismiss()
+
                 //    progressBar.setVisibility(View.GONE)
                     recyclerview.visibility = android.view.View.VISIBLE
+                }else{
+                    custompgbar.dismiss()
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
+                custompgbar.dismiss()
             }
 
 
@@ -182,6 +197,8 @@ class MainActivity : AppCompatActivity() {
 
 
 private fun searchByName(name: String) {
+
+
     reference = database.getReference("medicines")
     // adding a value listener to database reference to perform search
     reference.addValueEventListener(object: ValueEventListener {
@@ -221,6 +238,40 @@ private fun searchByName(name: String) {
 
     })
 }
+
+    private fun setupSearchEditText(adapter: MedAdapter) {
+        val searchMed = findViewById<EditText>(R.id.SearchM)
+        searchMed.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Not used
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Not used
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                val searchEmployeeId = s.toString()
+                val searchEmpName = s.toString().capitalize().trim()
+
+                if (searchEmpName.isBlank()) {
+                    // If the search text is empty, restore the original data in the RecyclerView
+                    adapter.submitList(medArrayList)
+                } else {
+                    searchbtn.setOnClickListener {
+                        // Filter the employee data based on the entered employee ID
+                        val filteredList = medArrayList.filter { it.medname == searchEmpName }
+                        if (filteredList.isNotEmpty()) {
+                            adapter.submitList(filteredList)
+                        } else {
+                            Toast.makeText(this@MainActivity, "No Medicine found", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                }
+            }
+        })
+    }
 
 }
 
